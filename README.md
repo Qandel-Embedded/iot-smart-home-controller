@@ -1,24 +1,35 @@
 # IoT Smart Home Controller
 
-A distributed IoT system for smart home automation featuring low-power sensor nodes, MQTT messaging, and a central hub with edge AI processing.
+[![CI](https://github.com/Qandel-Embedded/iot-smart-home-controller/actions/workflows/ci.yml/badge.svg)](https://github.com/Qandel-Embedded/iot-smart-home-controller/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Docker](https://img.shields.io/badge/docker-compose-blue)](docker-compose.yml)
+
+Distributed IoT smart home system: ESP32 sensor nodes + Python hub + MQTT + Grafana dashboard.
 
 ## Architecture
-- **Edge Nodes:** ESP32-based sensor nodes (BLE + WiFi)
-- **Protocol:** MQTT over TLS
-- **Hub:** Raspberry Pi 4 with Node-RED dashboard
-- **Cloud:** Optional AWS IoT Core integration
+```
+ESP32 Nodes ─MQTT─► Hub (Python) ─► SQLite ─► Grafana
+```
 
-## Technologies
-- ESP32, STM32, Raspberry Pi
-- MQTT, BLE, WiFi, Zigbee
-- TensorFlow Lite for occupancy prediction
-- InfluxDB + Grafana monitoring
+## Quick Start (Docker)
+```bash
+git clone https://github.com/Qandel-Embedded/iot-smart-home-controller
+cd iot-smart-home-controller
+docker-compose up -d
+# Hub at localhost:1883, Grafana at localhost:3000
+```
 
-## Features
-- 20+ sensor node support
-- < 5ms command latency on local network
-- OTA firmware updates
-- Energy harvesting nodes (solar + battery)
+## Flash ESP32 Node
+Open `node/firmware.ino` in Arduino IDE, set WiFi/MQTT credentials, flash to ESP32.
+
+## Stack
+| Component | Technology |
+|-----------|-----------|
+| Sensor nodes | ESP32 + DHT22 + PIR |
+| Protocol | MQTT over WiFi |
+| Hub | Python + paho-mqtt + SQLite |
+| Dashboard | Grafana |
+| Container | Docker Compose |
 
 ---
-**Portfolio:** https://ahmedqandel.com | **Hire me on Upwork**
+**Portfolio:** https://ahmedqandel.com | Available for hire on Upwork
